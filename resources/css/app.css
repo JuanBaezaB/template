@@ -3,3 +3,136 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* sidebar  */
+#sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1032;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%) translateY(0) translateZ(0);
+    -webkit-overflow-scrolling: touch;
+    will-change: transform;
+    transition: color 1s ease;
+}
+
+.side-trans-enabled #sidebar {
+    transition: transform .45s cubic-bezier(.2, .61, .42, .97);
+}
+
+@media (max-width: 767.98px) {
+    .sidebar-o-xs #sidebar {
+        transform: translateX(0) translateY(0) translateZ(0);
+    }
+}
+
+
+@media (min-width: 768px) {
+    #sidebar {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 1023.98px) and (min-width: 768px) {
+    .sidebar-o-md #sidebar {
+        transform: translateX(0) translateY(0) translateZ(0);
+    }
+
+    /* Overlay sidebar on MD */
+    #sidenav-overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.4);
+        transition: opacity 1s;
+        visibility: hidden;
+        opacity: 0;
+        z-index: 997;
+    }
+    .dark #sidenav-overlay{
+        background: rgba(0, 0, 0, 0.3);
+    }
+    .sidebar-o-md #sidenav-overlay {
+        visibility: visible;
+        opacity: 1;
+    }
+
+}
+
+
+@media (min-width: 1024px) {
+    #page-container.sidebar-o {
+        padding-left: 250px;
+    }
+
+    #sidebar_close {
+        display: none;
+    }
+
+    .sidebar-o #sidebar {
+        transform: translateX(0) translateY(0) translateZ(0);
+    }
+
+}
+
+
+/* scrollbar - sidebar */
+/* dark */
+.dark #sidebar ::-webkit-scrollbar {
+    width: 7.5px;
+
+}
+
+.dark #sidebar ::-webkit-scrollbar-track {
+    background: #1F2937;
+    width: 7.5px;
+
+}
+
+.dark #sidebar ::-webkit-scrollbar-thumb {
+    background: #374151;
+    border-radius: 5px;
+    width: 7.5px;
+}
+
+.dark #sidebar ::-webkit-scrollbar-thumb:hover {
+    background: #374151;
+}
+
+/* light */
+#sidebar ::-webkit-scrollbar {
+    width: 7.5px;
+
+}
+
+#sidebar ::-webkit-scrollbar-track {
+    background: #ffffff;
+
+}
+
+#sidebar ::-webkit-scrollbar-thumb {
+    background: #cccc;
+    border-radius: 5px;
+}
+
+#sidebar ::-webkit-scrollbar-thumb:hover {
+    background: #cccc;
+}
+
+/* sidebar  */
+
+
+
+
+/* Transition main and header */
+.transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.2, .61, .42, .97);
+    transition-duration: .45s;
+}
