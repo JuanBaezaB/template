@@ -48,7 +48,7 @@ const closeModal = () => {
         </template>
 
         <template #content>
-            <div class="max-w-xl text-sm text-gray-600">
+            <div class="max-w-xl text-sm text-gray-600 dark:text-gray-400">
                 Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.
             </div>
 
@@ -59,13 +59,16 @@ const closeModal = () => {
             </div>
 
             <!-- Delete Account Confirmation Modal -->
-            <DialogModal :show="confirmingUserDeletion" @close="closeModal">
-                <template #title>
+            <DialogModal :show="confirmingUserDeletion" @close="closeModal" >
+                <template #title >
                     Delete Account
                 </template>
 
                 <template #content>
-                    Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.
+
+                    <div class="text-sm text-gray-600 dark:text-gray-400">
+                        Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.
+                    </div>
 
                     <div class="mt-4">
                         <TextInput
@@ -100,3 +103,7 @@ const closeModal = () => {
         </template>
     </ActionSection>
 </template>
+
+<style>
+
+</style>

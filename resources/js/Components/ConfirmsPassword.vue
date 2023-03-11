@@ -82,18 +82,14 @@ const closeModal = () => {
             </template>
 
             <template #content>
-                {{ content }}
+                <div class="text-sm text-gray-600 dark:text-gray-400">
+                    {{ content }}
+                </div>
+
 
                 <div class="mt-4">
-                    <TextInput
-                        ref="passwordInput"
-                        v-model="form.password"
-                        type="password"
-                        class="mt-1 block w-3/4"
-                        placeholder="Password"
-                        autocomplete="current-password"
-                        @keyup.enter="confirmPassword"
-                    />
+                    <TextInput ref="passwordInput" v-model="form.password" type="password" class="mt-1 block w-3/4"
+                        placeholder="Password" autocomplete="current-password" @keyup.enter="confirmPassword" />
 
                     <InputError :message="form.error" class="mt-2" />
                 </div>
@@ -104,12 +100,8 @@ const closeModal = () => {
                     Cancel
                 </SecondaryButton>
 
-                <PrimaryButton
-                    class="ml-3"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                    @click="confirmPassword"
-                >
+                <PrimaryButton class="ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
+                    @click="confirmPassword">
                     {{ button }}
                 </PrimaryButton>
             </template>

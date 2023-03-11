@@ -8,28 +8,40 @@ import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
+import NavLink from '@/Components/Layouts/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 
-
+import { ChartBarIcon } from '@heroicons/vue/24/outline'
 defineProps({
     title: String,
 });
 
 const showingNavigationDropdown = ref(false);
 
+const logout = () => {
+    router.post(route('logout'));
+};
 </script>
 
 <template>
     <Head :title="title" />
 
 
-    <div id="page-container" class="sidebar-o side-trans-enabled min-h-full transition-all duration-200 ease-in-out">
+    <div id="page-container" class="sidebar-o side-trans-enabled min-h-full transition-page-all duration-200 ease-in-out">
         <div id="sidenav-overlay"></div>
-        <AppSidebar />
+
+        <AppSidebar>
+
+            <NavLink :href="route('dashboard')" :active="route().current('dashboard')"
+                class="group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md">
+                <ChartBarIcon class="mr-3 flex-shrink-0 h-5 w-5" />
+                Dashboard
+            </NavLink>
+
+        </AppSidebar>
 
 
-        <div class="flex flex-col ">
+        <div class="flex flex-col">
             <AppHeader>
                 <div class="flex items-center">
                     <!-- Settings Dropdown -->
@@ -49,27 +61,20 @@ const showingNavigationDropdown = ref(false);
                                         </svg>
                                     </div>
                                 </button>
-                                <span v-else class="inline-flex rounded-md">
-                                    <button type="button"
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
 
-                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M4.5 12.75l6 6 9-13.5" />
-                                        </svg>
-                                    </button>
-                                </span>
                             </template>
-                            <template #content>
+                            <template #content >
                                 <!-- Account Management -->
                                 <div class="block px-4 py-2 text-xs text-gray-400">
                                     Manage Account
                                 </div>
+
                                 <DropdownLink :href="route('profile.show')">
                                     Profile
                                 </DropdownLink>
-                                <div class="border-t border-gray-100" />
+
+                                <div class="border-t border-gray-100 dark:border-slate-50/[0.06] " />
+
                                 <!-- Authentication -->
                                 <form @submit.prevent="logout">
                                     <DropdownLink as="button">
@@ -88,12 +93,27 @@ const showingNavigationDropdown = ref(false);
                 </div>
             </header>
 
-
-            <main id="main-panel">
-                <slot />
-            </main>
+            <transition name="page" mode="out-in" appear>
+                <main id="main-panel" :key="$page.url">
+                    <slot />
+                </main>
+            </transition>
         </div>
 
 
 
-</div></template>
+    </div>
+</template>
+
+
+<style>
+.page-enter-active,
+.page-leave-active {
+    transition: opacity 1s ease;
+}
+
+.page-enter-from,
+.page-leave-to {
+    opacity: 0;
+}
+</style>
